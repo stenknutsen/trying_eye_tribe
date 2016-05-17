@@ -1,9 +1,14 @@
-import com.theeyetribe.clientsdk.*;
 import com.theeyetribe.clientsdk.data.GazeData;
 import com.theeyetribe.clientsdk.GazeManager;
 import com.theeyetribe.clientsdk.IGazeListener;
+import com.theeyetribe.clientsdk.data.CalibrationResult;
+import com.theeyetribe.clientsdk.ICalibrationProcessHandler;
 
 public class TETSimple {
+	static int gx;
+	static int gy;
+	static int hx;
+	static int hy;
 
 	public static void main(String[] args) {
 		System.out.println("Hi eyetribe!");
@@ -15,13 +20,16 @@ public class TETSimple {
 
 			@Override
 			public void onGazeUpdate(GazeData gazeData) {
-
-				System.out.println(gazeData.toString());
+				gx = (int) gazeData.leftEye.smoothedCoordinates.x;
+				gy = (int) gazeData.leftEye.smoothedCoordinates.y;
+				hx = (int) gazeData.rightEye.smoothedCoordinates.x;
+				hy = (int) gazeData.rightEye.smoothedCoordinates.y;
+				System.out.println(gx+ " , " + gy + " --- "+ hx + " , "+hy);
 
 			}
 		});
         
-        //TODO: Do awesome gaze control wizardry
+   
         
         Runtime.getRuntime().addShutdownHook(new Thread()
         {
