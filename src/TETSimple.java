@@ -1,5 +1,6 @@
 import com.theeyetribe.clientsdk.data.GazeData;
 
+import java.io.IOException;
 import java.security.Timestamp;
 
 import com.theeyetribe.clientsdk.GazeManager;
@@ -7,14 +8,21 @@ import com.theeyetribe.clientsdk.IGazeListener;
 import com.theeyetribe.clientsdk.data.CalibrationResult;
 import com.theeyetribe.clientsdk.ICalibrationProcessHandler;
 
+
+
+
 public class TETSimple {
+	
+	
 	static int gx;
 	static int gy;
 	static int hx;
 	static int hy;
 	static String time_now;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)  throws 
+	 IOException {
+		Runtime.getRuntime().exec("/Applications/EyeTribe/EyeTribe");
 		System.out.println("Hi eyetribe!");
 		final GazeManager gm = GazeManager.getInstance();
         boolean success = gm.activate();
