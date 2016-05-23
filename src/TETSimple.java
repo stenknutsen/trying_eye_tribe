@@ -3,11 +3,8 @@ import com.theeyetribe.clientsdk.data.GazeData;
 import java.io.IOException;
 import com.theeyetribe.clientsdk.GazeManager;
 import com.theeyetribe.clientsdk.IGazeListener;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
+
 
 public class TETSimple {
 	
@@ -17,6 +14,8 @@ public class TETSimple {
 	static int hx;
 	static int hy;
 	static String time_now;
+	static int eyex;
+	static int eyey;
 	
 	public static void main(String[] args)  throws 
 	 IOException {
@@ -35,12 +34,15 @@ public class TETSimple {
 			@Override
 			public void onGazeUpdate(GazeData gazeData) {
 				time_now = gazeData.timeStampString;
-				gx = (int) gazeData.rightEye.smoothedCoordinates.x;
+				gx = (int) gazeData.leftEye.smoothedCoordinates.x;
 				gy = (int) gazeData.leftEye.smoothedCoordinates.y;
 				hx = (int) gazeData.rightEye.smoothedCoordinates.x;
 				hy = (int) gazeData.rightEye.smoothedCoordinates.y;
-				System.out.println(gx+ " , " + gy + " --- "+ hx + " , "+hy+", time:"+time_now);
-				robot.mouseMove((int) gazeData.smoothedCoordinates.x, (int) gazeData.smoothedCoordinates.y);
+				eyex = (int) gazeData.smoothedCoordinates.x;
+				eyey = (int) gazeData.smoothedCoordinates.y;
+				System.out.println(gx+ " , " + gy + " --- "+ hx + " , "+hy+", time:"+time_now+", Mouse is here ("+eyex+", "+eyey+")");
+				
+				robot.mouseMove(eyex, eyey);
 
 			}
 		});
